@@ -42,21 +42,24 @@ const jumpTime = 650;
 
 function jump() {
 
+    /*
+       Don't jump while already jumping
+       or after game over.
+    */
+
     if (isJumping || !gameRunning) {
         return;
     }
 
     isJumping = true;
 
-    const startTime =
-        performance.now();
+    const startTime = performance.now();
 
 
     function jumpAnimation(currentTime) {
 
         const elapsed =
             currentTime - startTime;
-
 
         const progress =
             Math.min(
@@ -76,8 +79,7 @@ function jump() {
 
 
         /*
-           ONLY move the player upward.
-           Do NOT scale him.
+           Move player upward.
         */
 
         player.style.transform =
@@ -107,19 +109,65 @@ function jump() {
 
 
 /* =========================
-   SPACE KEY
+   PC KEYBOARD CONTROL
 ========================= */
 
 document.addEventListener(
     "keydown",
     function(event) {
 
-        if (event.code === "Space") {
+        if (
+            event.code === "Space" ||
+            event.code === "ArrowUp"
+        ) {
 
             event.preventDefault();
 
             jump();
         }
+
+    }
+);
+
+
+/* =========================
+   MOBILE TOUCH CONTROL
+========================= */
+
+game.addEventListener(
+    "touchstart",
+    function(event) {
+
+        /*
+           Prevent the phone from
+           scrolling while playing.
+        */
+
+        event.preventDefault();
+
+        jump();
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+/* =========================
+   MOUSE CLICK CONTROL
+========================= */
+
+/*
+   This also allows you to test
+   the mobile-style control on PC.
+*/
+
+game.addEventListener(
+    "click",
+    function(event) {
+
+        jump();
 
     }
 );
@@ -167,6 +215,10 @@ function createObstacle() {
                 return;
             }
 
+
+            /*
+               Move obstacle.
+            */
 
             position -= speed;
 
@@ -229,6 +281,11 @@ function createObstacle() {
                     "Score: " + score;
 
 
+                /*
+                   Increase speed every
+                   5 points.
+                */
+
                 if (score % 5 === 0) {
 
                     speed += 0.5;
@@ -245,12 +302,20 @@ function createObstacle() {
 
 function startObstacles() {
 
+    /*
+       First obstacle.
+    */
+
     setTimeout(function() {
 
         createObstacle();
 
     }, 1500);
 
+
+    /*
+       Continue creating obstacles.
+    */
 
     obstacleTimer =
         setInterval(function() {
