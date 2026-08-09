@@ -42,11 +42,6 @@ const jumpTime = 650;
 
 function jump() {
 
-    /*
-       Don't jump while already jumping
-       or after game over.
-    */
-
     if (isJumping || !gameRunning) {
         return;
     }
@@ -68,19 +63,11 @@ function jump() {
             );
 
 
-        /*
-           Smooth jump curve.
-        */
-
         const height =
             Math.sin(
                 progress * Math.PI
             ) * jumpHeight;
 
-
-        /*
-           Move player upward.
-        */
 
         player.style.transform =
             `translateY(${-height}px)`;
@@ -109,7 +96,7 @@ function jump() {
 
 
 /* =========================
-   PC KEYBOARD CONTROL
+   PC KEYBOARD
 ========================= */
 
 document.addEventListener(
@@ -131,7 +118,7 @@ document.addEventListener(
 
 
 /* =========================
-   MOBILE TOUCH CONTROL
+   MOBILE TOUCH
 ========================= */
 
 game.addEventListener(
@@ -139,15 +126,24 @@ game.addEventListener(
     function(event) {
 
         /*
-           Don't jump when the user
-           touches the Play Again button.
+           If the user touches the
+           Play Again button, DON'T
+           run the jump function.
         */
 
         if (
-            event.target.closest("#game-over button")
+            event.target.closest(
+                "#game-over button"
+            )
         ) {
             return;
         }
+
+
+        if (!gameRunning) {
+            return;
+        }
+
 
         event.preventDefault();
 
@@ -161,22 +157,62 @@ game.addEventListener(
 
 
 /* =========================
-   MOUSE CLICK CONTROL
+   MOUSE CLICK
 ========================= */
-
-/*
-   This also allows you to test
-   the mobile-style control on PC.
-*/
 
 game.addEventListener(
     "click",
     function(event) {
 
+        /*
+           Don't make the player jump
+           when clicking Play Again.
+        */
+
+        if (
+            event.target.closest(
+                "#game-over button"
+            )
+        ) {
+            return;
+        }
+
+
+        if (!gameRunning) {
+            return;
+        }
+
+
         jump();
 
     }
 );
+
+
+/* =========================
+   PLAY AGAIN BUTTON
+========================= */
+
+function restartGame(event) {
+
+    /*
+       Stop the button click from
+       reaching the game.
+    */
+
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+
+    /*
+       Reload the game.
+    */
+
+    window.location.href =
+        window.location.href;
+}
 
 
 /* =========================
@@ -221,10 +257,6 @@ function createObstacle() {
                 return;
             }
 
-
-            /*
-               Move obstacle.
-            */
 
             position -= speed;
 
@@ -287,11 +319,6 @@ function createObstacle() {
                     "Score: " + score;
 
 
-                /*
-                   Increase speed every
-                   5 points.
-                */
-
                 if (score % 5 === 0) {
 
                     speed += 0.5;
@@ -308,20 +335,12 @@ function createObstacle() {
 
 function startObstacles() {
 
-    /*
-       First obstacle.
-    */
-
     setTimeout(function() {
 
         createObstacle();
 
     }, 1500);
 
-
-    /*
-       Continue creating obstacles.
-    */
 
     obstacleTimer =
         setInterval(function() {
@@ -355,16 +374,6 @@ function gameOver() {
 
     gameOverScreen.style.display =
         "block";
-}
-
-
-/* =========================
-   RESTART
-========================= */
-
-function restartGame() {
-
-    location.reload();
 }
 
 
