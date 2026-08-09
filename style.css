@@ -889,4 +889,13 @@ body {
     color: white;
 
     font-weight: bold;
+}#game-over button {
+    position: relative;
+    z-index: 100;
+
+    min-width: 180px;
+    min-height: 52px;
+
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }

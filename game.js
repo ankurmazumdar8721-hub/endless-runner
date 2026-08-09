@@ -139,9 +139,15 @@ game.addEventListener(
     function(event) {
 
         /*
-           Prevent the phone from
-           scrolling while playing.
+           Don't jump when the user
+           touches the Play Again button.
         */
+
+        if (
+            event.target.closest("#game-over button")
+        ) {
+            return;
+        }
 
         event.preventDefault();
 
