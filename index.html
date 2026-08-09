@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Endless Runner</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="game-wrapper">
+
+        <div class="top-bar">
+
+            <div class="game-title">
+                <span>🏃</span>
+                <h1>Endless Runner</h1>
+            </div>
+
+            <div id="score">
+                Score: 0
+            </div>
+
+        </div>
+
+
+        <div id="game">
+
+            <!-- CLOUDS -->
+            <div class="cloud cloud1">☁️</div>
+            <div class="cloud cloud2">☁️</div>
+            <div class="cloud cloud3">☁️</div>
+            <div class="cloud cloud4">☁️</div>
+
+
+            <!-- MOUNTAINS -->
+            <div class="mountains">
+
+                <div class="mountain mountain1"></div>
+                <div class="mountain mountain2"></div>
+                <div class="mountain mountain3"></div>
+                <div class="mountain mountain4"></div>
+
+            </div>
+
+
+            <!-- TREES -->
+            <div class="trees">
+
+                <div class="tree tree1">🌲</div>
+                <div class="tree tree2">🌲</div>
+                <div class="tree tree3">🌲</div>
+                <div class="tree tree4">🌲</div>
+                <div class="tree tree5">🌲</div>
+                <div class="tree tree6">🌲</div>
+
+            </div>
+
+<div id="player">
+
+    <div class="player-name">PARUL</div>
+
+    <img src="player.png" alt="Player">
+
+</div>
+
+
+            <!-- GROUND -->
+            <div id="ground">
+
+                <div class="grass"></div>
+
+                <div class="dirt"></div>
+
+            </div>
+
+
+            <!-- GAME OVER -->
+            <div id="game-over">
+
+                <h2>GAME OVER!</h2>
+
+                <p id="final-score">
+                    Score: 0
+                </p>
+
+                <button onclick="restartGame()">
+                    🔄 Play Again
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="instructions">
+            Press <strong>SPACE</strong> to jump
+        </div>
+
+    </div>
+
+
+    <script src="game.js"></script>
+
+</body>
+
+</html>
